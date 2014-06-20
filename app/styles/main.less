@@ -1,0 +1,87 @@
+@import '../bower_components/bootstrap/less/bootstrap';
+
+//@castBlue: #1467fd;
+@controlsForeground: white;
+@controlsBackground: #2a2a2a;
+@controlsBorder: black;
+
+body {
+    padding-top: 70px;
+}
+
+.cast-player {
+    .video-wrapper {
+        width: 100%;
+        height: auto;
+
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        border: 1px solid @controlsBorder;
+        border-bottom: 0;
+
+        display: block;
+
+        background: @controlsBackground;
+
+        video {
+            width: 100%;
+            height: auto;
+
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+
+            display: block;
+        }
+    }
+
+    h1 {
+        overflow: hidden;
+    }
+
+    .input-group.video-active :first-child {
+        border-top-left-radius: 0;
+    }
+
+    .input-group.video-active :last-child {
+        border-top-right-radius: 0;
+    }
+
+    .input-group {
+        .btn-default, .input-group-addon, input {
+            background: @controlsBackground;
+            color: @controlsForeground;
+            border-color: @controlsBorder;
+        }
+
+        input[type='range']::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            background-color: @controlsForeground;
+            width: 10px;
+            height: 26px;
+        }
+
+        .cast-off,
+        .cast-on,
+        .cast-pending {
+            display: block;
+            width: 22px;
+            height: 20px;
+            background-size: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-image: url("/images/cast_off.png");
+        }
+
+        .cast-on {
+            background-image: url("/images/cast_on.png");
+        }
+
+        .cast-pending {
+            background-image: url("/images/cast_on2.png");
+        }
+    }
+
+    .list-group-item {
+        word-wrap: break-word;
+    }
+}

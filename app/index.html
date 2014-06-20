@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html ng-app="timer">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Settlers timer</title>
+
+    <!-- #build:css styles/vendor.css -->
+    <!-- #bower:css -->
+    <!-- #endbower -->
+    <!-- #endbuild -->
+
+    <!-- build:css({.tmp,app}) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+
+    <!-- ****** faviconit.com favicons ****** -->
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="icon" sizes="16x16 32x32 64x64" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="196x196" href="/images/icons/favicon-196.png">
+    <link rel="icon" type="image/png" sizes="160x160" href="/images/icons/favicon-160.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/images/icons/favicon-96.png">
+    <link rel="icon" type="image/png" sizes="64x64" href="/images/icons/favicon-64.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16.png">
+    <!-- ****** faviconit.com favicons ****** -->
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-time"></span> Timer</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li ui-sref-active="active"><a ui-sref="play">Play</a></li>
+                    <li ui-sref-active="active"><a ui-sref="settings">Settings</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container" ui-view>
+    </main>
+
+    <!-- build:js scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-cache/src/angular-cache.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/ngstorage/ngStorage.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js({app,.tmp}) scripts/main.js -->
+    <script src="scripts/timer.js"></script>
+    <script src="scripts/controllers/play.js"></script>
+    <script src="scripts/controllers/settings.js"></script>
+    <!-- inject:partials -->
+    <!-- endinject -->
+    <!-- endbuild -->
+</body>
+</html>

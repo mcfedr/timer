@@ -1,0 +1,22 @@
+<h1>Settings</h1>
+<form class="form-horizontal">
+    <div class="form-group">
+        <label for="players" class="col-sm-2 control-label">Number of players</label>
+        <div class="col-sm-10">
+            <input type="number" class="form-control" id="players" ng-model="settings.players">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="length" class="col-sm-2 control-label">Length of turn (minutes)</label>
+        <div class="col-sm-10">
+            <input type="number" class="form-control" id="length" ng-model="settings.length" min="0">
+        </div>
+    </div>
+
+    <div class="form-group" ng-repeat="x in range(settings.players) track by $index">
+        <label for="player-{{ $index }}" class="col-sm-2 control-label">Player {{ $index + 1 }} name</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="player-{{ $index }}" placeholder="Player {{ $index + 1 }}" ng-model="settings.names[$index]">
+        </div>
+    </div>
+</form>
