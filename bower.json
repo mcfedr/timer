@@ -14,6 +14,10 @@
     "bootstrap": "~3.1",
     "jquery": "~2.0",
     "ngstorage": "~0.3.0",
-    "angular-ui-router": "~0.2.10"
+    "angular-ui-router": "~0.2.10",
+    "moment": "~2.7.0",
+    "stringjs": "~1.8.1",
+    "ngFitText": "~2.4.0",
+    "buzz": "~1.1.0"
   }
 }
