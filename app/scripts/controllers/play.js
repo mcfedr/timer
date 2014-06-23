@@ -2,7 +2,7 @@
 angular.module('timer').controller('play', function ($scope, settings, $timeout) {
     var timerTimeout,
         soundEnabled = false,
-        alarm = new buzz.sound('/images/alarm.mp3');
+        alarm = new buzz.sound('/sounds/alarm.mp3');
 
     $scope.settings = settings;
 
@@ -30,6 +30,7 @@ angular.module('timer').controller('play', function ($scope, settings, $timeout)
             $timeout.cancel(timerTimeout);
         }
         $scope.remainingTime = 'Stopped';
+        $scope.silence();
     };
 
     function timer() {
