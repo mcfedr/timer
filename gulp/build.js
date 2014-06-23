@@ -4,11 +4,9 @@ var gulp = require('gulp');
 
 var $ = require('gulp-load-plugins')();
 
-var less = require('gulp-less');
-
 gulp.task('styles', function () {
     return gulp.src('app/styles/main.less')
-        .pipe(less())
+        .pipe($.less())
         .pipe($.autoprefixer('last 1 version'))
         .pipe(gulp.dest('.tmp/styles'))
         .pipe($.size());
@@ -29,7 +27,7 @@ gulp.task('partials', function () {
         quotes: true
       }))
       .pipe($.ngHtml2js({
-        moduleName: "cast",
+        moduleName: "timer",
         prefix: "partials/"
       }))
       .pipe(gulp.dest(".tmp/partials"))

@@ -48,7 +48,8 @@
     "karma-phantomjs-launcher": "^0.1.4",
     "gulp-protractor": "0.0.7",
     "protractor": "~0.22.0",
-    "require-dir": "~0.1.0"
+    "require-dir": "~0.1.0",
+    "gulp-gh-pages": "~0.3.2"
   },
   "repository": {
     "type": "git",
