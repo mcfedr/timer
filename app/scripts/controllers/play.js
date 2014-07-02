@@ -1,7 +1,6 @@
 /*global buzz:false, moment, S */
 angular.module('timer').controller('play', function ($scope, settings) {
     var requestId,
-        soundEnabled = false,
         alarm = new buzz.sound('/sounds/alarm.mp3'),
         end;
 
@@ -18,7 +17,6 @@ angular.module('timer').controller('play', function ($scope, settings) {
     $scope.start = function(player) {
         $scope.settings.currentPlayer = player;
         $scope.settings.endTime = moment().add('minutes', $scope.settings.length);
-        soundEnabled = true;
         timer();
     };
 
@@ -46,7 +44,7 @@ angular.module('timer').controller('play', function ($scope, settings) {
                 $scope.remainingTime = 'Finished!';
                 $scope.settings.endTime = null;
                 requestId = null;
-                if (soundEnabled && settings.sound) {
+                if (settings.sound) {
                     alarm.play();
                 }
             }
