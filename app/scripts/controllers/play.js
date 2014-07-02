@@ -1,8 +1,9 @@
 /*global buzz:false, moment, S */
-angular.module('timer').controller('play', function ($scope, settings, $timeout) {
-    var timerTimeout,
+angular.module('timer').controller('play', function ($scope, settings) {
+    var requestId,
         soundEnabled = false,
-        alarm = new buzz.sound('/sounds/alarm.mp3');
+        alarm = new buzz.sound('/sounds/alarm.mp3'),
+        end;
 
     $scope.settings = settings;
 
@@ -26,8 +27,8 @@ angular.module('timer').controller('play', function ($scope, settings, $timeout)
     };
 
     $scope.stop = function() {
-        if (timerTimeout) {
-            $timeout.cancel(timerTimeout);
+        if (requestId) {
+            window.cancelAnimationFrame(requestId);
         }
         $scope.remainingTime = 'Stopped';
         $scope.silence();
@@ -35,26 +36,29 @@ angular.module('timer').controller('play', function ($scope, settings, $timeout)
 
     function timer() {
         $scope.stop();
-        timerTimeout = $timeout(timerUpdate, 10);
+        end = moment($scope.settings.endTime);
+        requestId = window.requestAnimationFrame(timerUpdate);
     }
 
     function timerUpdate() {
-        var end = moment($scope.settings.endTime);
-        if (end.isBefore()) {
-            $scope.remainingTime = 'Finished!';
-            $scope.settings.endTime = null;
-            timerTimeout = null;
-            if (soundEnabled && settings.sound) {
-                alarm.play();
+        $scope.$apply(function() {
+            if (end.isBefore()) {
+                $scope.remainingTime = 'Finished!';
+                $scope.settings.endTime = null;
+                requestId = null;
+                if (soundEnabled && settings.sound) {
+                    alarm.play();
+                }
             }
-        }
-        else {
-            $scope.remainingTime =
-                S(Math.floor(moment.duration(end.diff(moment())).as('minutes'))).padLeft(2, '0').s +
-                ':' + S(moment.duration(end.diff(moment())).get('seconds')).padLeft(2, '0').s +
-                ':' + S(moment.duration(end.diff(moment())).get('milliseconds')).padLeft(3, '0').s;
-            timerTimeout = $timeout(timerUpdate, 10);
-        }
+            else {
+                var remaining = moment.duration(end.diff(moment()));
+                $scope.remainingTime =
+                    S(Math.floor(remaining.as('minutes'))).padLeft(2, '0').s +
+                    ':' + S(remaining.get('seconds')).padLeft(2, '0').s +
+                    ':' + S(remaining.get('milliseconds')).padLeft(3, '0').s;
+                requestId = window.requestAnimationFrame(timerUpdate);
+            }
+        });
     }
 
     if ($scope.settings.endTime) {
