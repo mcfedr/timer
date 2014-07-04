@@ -4,7 +4,7 @@ angular.module('timer').controller('play', function ($scope, settings) {
         alarm = new buzz.sound('/sounds/alarm.mp3'),
         reload = new buzz.sound('/sounds/reload.mp3'),
         end,
-        soundHack;
+        soundEnabled;
 
     $scope.settings = settings;
 
@@ -19,8 +19,8 @@ angular.module('timer').controller('play', function ($scope, settings) {
     $scope.start = function(player) {
         $scope.settings.currentPlayer = player;
         $scope.settings.endTime = moment().add('minutes', $scope.settings.length);
-        if (!soundHack) {
-            soundHack = true;
+        if (!soundEnabled) {
+            soundEnabled = true;
             alarm.play();
             alarm.pause();
         }
@@ -52,7 +52,7 @@ angular.module('timer').controller('play', function ($scope, settings) {
                 $scope.remainingTime = 'Finished!';
                 $scope.settings.endTime = null;
                 requestId = null;
-                if (settings.sound) {
+                if (soundEnabled && settings.sound) {
                     alarm.play();
                 }
             }

@@ -16,3 +16,7 @@ angular.module('timer', ['ngAnimate', 'ngTouch', 'ngStorage', 'ui.router', 'ngFi
                 controller: 'settings'
             });
     });
+
+$('.nav a').click(function(){
+    $('.navbar-collapse').collapse('hide');
+});
