@@ -2,7 +2,7 @@ var gulp = require('gulp');
 
 var $ = require('gulp-load-plugins')();
 
-gulp.task('deploy', ['clean', 'build'], function () {
+gulp.task('deploy', ['build'], function () {
     return gulp.src("./dist/**/*")
         .pipe(string_src('CNAME', 'timer.fedr.co'))
         .pipe($.using())
