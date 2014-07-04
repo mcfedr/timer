@@ -1,6 +1,6 @@
 /*global buzz:false, moment, S */
-angular.module('timer').controller('play', function ($scope, settings) {
-    var requestId,
+angular.module('timer').controller('play', function ($scope, settings, $timeout) {
+    var timeoutId,
         alarm = new buzz.sound('/sounds/alarm.mp3'),
         reload = new buzz.sound('/sounds/reload.mp3'),
         end,
@@ -33,8 +33,8 @@ angular.module('timer').controller('play', function ($scope, settings) {
     };
 
     $scope.stop = function() {
-        if (requestId) {
-            window.cancelAnimationFrame(requestId);
+        if (timeoutId) {
+            $timeout.cancel(timeoutId);
         }
         $scope.remainingTime = 'Stopped';
         $scope.silence();
@@ -43,7 +43,7 @@ angular.module('timer').controller('play', function ($scope, settings) {
     function timer() {
         $scope.stop();
         end = moment($scope.settings.endTime);
-        requestId = window.requestAnimationFrame(timerUpdate);
+        timeoutId = $timeout(timerUpdate, 1000);
     }
 
     function timerUpdate() {
@@ -51,7 +51,7 @@ angular.module('timer').controller('play', function ($scope, settings) {
             if (end.isBefore()) {
                 $scope.remainingTime = 'Finished!';
                 $scope.settings.endTime = null;
-                requestId = null;
+                timeoutId = null;
                 if (soundEnabled && settings.sound) {
                     alarm.play();
                 }
@@ -60,9 +60,8 @@ angular.module('timer').controller('play', function ($scope, settings) {
                 var remaining = moment.duration(end.diff(moment()));
                 $scope.remainingTime =
                     S(Math.floor(remaining.as('minutes'))).padLeft(2, '0').s +
-                    ':' + S(remaining.get('seconds')).padLeft(2, '0').s +
-                    ':' + S(remaining.get('milliseconds')).padLeft(3, '0').s;
-                requestId = window.requestAnimationFrame(timerUpdate);
+                    ':' + S(remaining.get('seconds')).padLeft(2, '0').s;
+                timeoutId = $timeout(timerUpdate, 1000);
             }
         });
     }
